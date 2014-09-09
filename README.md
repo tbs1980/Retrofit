@@ -13,11 +13,11 @@ Now you will see the script under the directory called `source`. To run the scri
     $ cd source
     $ python comparison_to_cibse.py PATH_TO_DATA COMUMN_DATE COLUMN_TEMP ROOM_TYPE
 
-where `PATH_TO_DATA` is the path to data e.g `C:/data/TSB001.xlsx`, `COMUMN_DATE` is the column number corresponding to the date, `COLUMN_TEMP` is the column number of the temperature data and `ROOM_TYPE` the room type e.g. `livingroom`
+where `PATH_TO_DATA` is the path to data e.g `C:\data\TSB001.xlsx`, `COMUMN_DATE` is the column number corresponding to the date, `COLUMN_TEMP` is the column number of the temperature data and `ROOM_TYPE` the room type e.g. `livingroom`
 
 For example you may type
 
-    $ python comparison_to_cibse.py C:/data/TSB001.xlsx 0 1 livingroom
+    $ python comparison_to_cibse.py C:\data\TSB001.xlsx 0 1 livingroom
 
     file name : ./data/TSB001.xlsx
     date column : 0
