@@ -103,19 +103,30 @@ def compute_averages(file_name,cdate,c1,room):
       if current_date.month !=  month_check :
         # if not the first time I should append the values
         if month_check != 0 :
+          #print "month ",month_check
           month_list.append(month_check)
-          mean_t_list.append(np.mean(tot_t))
-          min_t_list.append(np.min(tot_t))
-          max_t_list.append(np.max(tot_t))
-          #print the seasonal result
-          thr_max,thr_min=get_threasholds(month_check,room)
-          tot_t_npy  = np.asarray(tot_t)
-          thr_min_list.append(thr_min)
-          thr_max_list.append(thr_max)
-          greater_than_max.append(100.*len(np.where(tot_t_npy>thr_max)[0])/float(len(tot_t)))
-          less_than_min.append(100*len(np.where(tot_t_npy<thr_min)[0])/float(len(tot_t)))
+          if len(tot_t) >0 :
+            mean_t_list.append(np.mean(tot_t))
+            min_t_list.append(np.min(tot_t))
+            max_t_list.append(np.max(tot_t))
+            thr_max,thr_min=get_threasholds(month_check,room)
+            tot_t_npy  = np.asarray(tot_t)
+            thr_min_list.append(thr_min)
+            thr_max_list.append(thr_max)
+            greater_than_max.append(100.*len(np.where(tot_t_npy>thr_max)[0])/float(len(tot_t)))
+            less_than_min.append(100*len(np.where(tot_t_npy<thr_min)[0])/float(len(tot_t)))
+          else :
+            mean_t_list.append(-1e90)
+            min_t_list.append(-1e90)
+            max_t_list.append(-1e90)
+            thr_max,thr_min=get_threasholds(month_check,room)
+            thr_max_list.append(thr_max)
+            thr_min_list.append(thr_min)
+            greater_than_max.append(-1e90)
+            less_than_min.append(-1e90)
 
           tot_t=[]
+
         #if value is not FALSE add it to the list
         if c_t[i] != 0 :
           tot_t.append( float(c_t[i]) )
@@ -128,23 +139,33 @@ def compute_averages(file_name,cdate,c1,room):
 
     except(ValueError):
       print "Skipping the value ",i,c_date[i]
+      #pass
 
   # append the mean of the last month
   month_list.append(month_check)
-  mean_t_list.append(np.mean(tot_t))
-  min_t_list.append(np.min(tot_t))
-  max_t_list.append(np.max(tot_t))
-  #print the seasonal result
-  thr_max,thr_min=get_threasholds(month_check,room)
-  tot_t_npy  = np.asarray(tot_t)
-  thr_min_list.append(thr_min)
-  thr_max_list.append(thr_max)
-  greater_than_max.append(100.*len(np.where(tot_t_npy>thr_max)[0])/float(len(tot_t)))
-  less_than_min.append(100*len(np.where(tot_t_npy<thr_min)[0])/float(len(tot_t)))
+  if len(tot_t) >0 :
+    mean_t_list.append(np.mean(tot_t))
+    min_t_list.append(np.min(tot_t))
+    max_t_list.append(np.max(tot_t))
+    thr_max,thr_min=get_threasholds(month_check,room)
+    tot_t_npy  = np.asarray(tot_t)
+    thr_min_list.append(thr_min)
+    thr_max_list.append(thr_max)
+    greater_than_max.append(100.*len(np.where(tot_t_npy>thr_max)[0])/float(len(tot_t)))
+    less_than_min.append(100*len(np.where(tot_t_npy<thr_min)[0])/float(len(tot_t)))
+  else :
+    mean_t_list.append(-1e90)
+    min_t_list.append(-1e90)
+    max_t_list.append(-1e90)
+    thr_max,thr_min=get_threasholds(month_check,room)
+    thr_max_list.append(thr_max)
+    thr_min_list.append(thr_min)
+    greater_than_max.append(-1e90)
+    less_than_min.append(-1e90)
 
   # print the averages
   print ""
-  print "month","mean","min","max","thr-min","thr-max","less-than-min%","greater-than-max%",
+  print "month","mean","min","max","thr-min","thr-max","less-than-min%","greater-than-max%"
   for i in range(len(month_list)):
     print month_list[i],mean_t_list[i],min_t_list[i],max_t_list[i],thr_min_list[i],thr_max_list[i],less_than_min[i],greater_than_max[i]
 
