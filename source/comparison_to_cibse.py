@@ -144,7 +144,7 @@ def compute_averages(file_name,cdate,c1,room):
 
   # print the averages
   print ""
-  print "month","mean","min","max","thr-min","thr-max","greater-than-max%","less-than-min%"
+  print "month","mean","min","max","thr-min","thr-max","less-than-min%","greater-than-max%",
   for i in range(len(month_list)):
     print month_list[i],mean_t_list[i],min_t_list[i],max_t_list[i],thr_min_list[i],thr_max_list[i],less_than_min[i],greater_than_max[i]
 
